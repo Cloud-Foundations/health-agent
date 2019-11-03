@@ -2,7 +2,7 @@ package packages
 
 import (
 	"errors"
-	"github.com/Symantec/tricorder/go/tricorder/units"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
 	"io"
 	"os"
 	"time"

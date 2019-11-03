@@ -1,11 +1,11 @@
 all:
-	@cd $(GOPATH)/src; go install github.com/Symantec/health-agent/cmd/*
+	@cd $(GOPATH)/src; go install github.com/Cloud-Foundations/health-agent/cmd/*
 
 
 TARBALL_TARGET = /tmp/$(LOGNAME)/health-agent.tar.gz
 
 tarball:
-	@cd $(GOPATH)/src; go install github.com/Symantec/health-agent/cmd/health-agent
+	@cd $(GOPATH)/src; go install github.com/Cloud-Foundations/health-agent/cmd/health-agent
 	@tar --owner=0 --group=0 -czf $(TARBALL_TARGET) \
 	init.d/health-agent.* \
 	scripts/install.lib \
@@ -18,5 +18,5 @@ format:
 
 
 test:
-	@find * -name '*_test.go' -printf 'github.com/Symantec/health-agent/%h\n' \
+	@find * -name '*_test.go' -printf 'github.com/Cloud-Foundations/health-agent/%h\n' \
 	| sort -u | xargs -r go test

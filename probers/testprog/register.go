@@ -1,8 +1,8 @@
 package testprog
 
 import (
-	"github.com/Symantec/tricorder/go/tricorder"
-	"github.com/Symantec/tricorder/go/tricorder/units"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
 )
 
 func (p *testprogconfig) register(dir *tricorder.DirectorySpec) error {

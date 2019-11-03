@@ -1,7 +1,7 @@
 package filesystems
 
 import (
-	"github.com/Symantec/tricorder/go/tricorder"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder"
 )
 
 func register(dir *tricorder.DirectorySpec) *prober {

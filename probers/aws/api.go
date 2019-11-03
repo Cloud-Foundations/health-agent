@@ -1,7 +1,7 @@
 package aws
 
 import (
-	"github.com/Symantec/health-agent/lib/proberlist"
+	"github.com/Cloud-Foundations/health-agent/lib/proberlist"
 )
 
 func New() proberlist.RegisterProber {

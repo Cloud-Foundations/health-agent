@@ -1,7 +1,7 @@
 package memory
 
 import (
-	"github.com/Symantec/Dominator/lib/meminfo"
+	"github.com/Cloud-Foundations/Dominator/lib/meminfo"
 )
 
 func (p *prober) probe() error {

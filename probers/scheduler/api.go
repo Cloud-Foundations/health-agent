@@ -1,8 +1,8 @@
 package scheduler
 
 import (
-	libprober "github.com/Symantec/health-agent/lib/prober"
-	"github.com/Symantec/tricorder/go/tricorder"
+	libprober "github.com/Cloud-Foundations/health-agent/lib/prober"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder"
 	"io"
 	"time"
 )

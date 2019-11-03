@@ -3,7 +3,7 @@ package storage
 import (
 	"bufio"
 	"fmt"
-	"github.com/Symantec/tricorder/go/tricorder/units"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
 	"os"
 )
 

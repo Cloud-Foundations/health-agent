@@ -3,7 +3,7 @@ package url
 import (
 	"net/http"
 
-	"github.com/Symantec/tricorder/go/tricorder"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder"
 )
 
 type urlconfig struct {

@@ -2,7 +2,7 @@ package proberlist
 
 import (
 	"fmt"
-	"github.com/Symantec/health-agent/lib/prober"
+	"github.com/Cloud-Foundations/health-agent/lib/prober"
 	"io"
 	"net/http"
 	"sort"
