@@ -3,10 +3,11 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/Symantec/tricorder/go/tricorder/messages"
 	"net"
 	"net/rpc"
 	"time"
+
+	"github.com/Cloud-Foundations/tricorder/go/tricorder/messages"
 )
 
 func checkHealth(address string) ([]string, error) {

@@ -1,8 +1,8 @@
 package virsh
 
 import (
-	"github.com/Symantec/health-agent/lib/proberlist"
-	"github.com/Symantec/tricorder/go/tricorder"
+	"github.com/Cloud-Foundations/health-agent/lib/proberlist"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder"
 )
 
 func newProber() proberlist.RegisterProber {

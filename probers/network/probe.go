@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Symantec/Dominator/lib/net/util"
-	"github.com/Symantec/tricorder/go/tricorder"
+	"github.com/Cloud-Foundations/Dominator/lib/net/util"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder"
 )
 
 var pingName string = "ping"

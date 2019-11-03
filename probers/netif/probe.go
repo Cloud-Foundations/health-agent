@@ -3,10 +3,11 @@ package netif
 import (
 	"bufio"
 	"fmt"
-	"github.com/Symantec/tricorder/go/tricorder/units"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
 )
 
 var filename string = "/proc/net/dev"

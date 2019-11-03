@@ -3,8 +3,9 @@ package httpd
 import (
 	"bufio"
 	"fmt"
-	"github.com/Symantec/Dominator/lib/html"
 	"net/http"
+
+	"github.com/Cloud-Foundations/Dominator/lib/html"
 )
 
 func statusHandler(w http.ResponseWriter, req *http.Request) {

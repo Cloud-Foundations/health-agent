@@ -9,10 +9,10 @@ import (
 	"runtime"
 	"syscall"
 
-	"github.com/Symantec/Dominator/lib/log/serverlogger"
-	"github.com/Symantec/health-agent/httpd"
-	"github.com/Symantec/tricorder/go/healthserver"
-	"github.com/Symantec/tricorder/go/tricorder"
+	"github.com/Cloud-Foundations/Dominator/lib/log/serverlogger"
+	"github.com/Cloud-Foundations/health-agent/httpd"
+	"github.com/Cloud-Foundations/tricorder/go/healthserver"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder"
 )
 
 var (

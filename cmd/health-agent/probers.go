@@ -1,19 +1,19 @@
 package main
 
 import (
-	"github.com/Symantec/health-agent/lib/proberlist"
-	"github.com/Symantec/health-agent/probers/aws"
-	"github.com/Symantec/health-agent/probers/dmi"
-	"github.com/Symantec/health-agent/probers/filesystems"
-	"github.com/Symantec/health-agent/probers/kernel"
-	"github.com/Symantec/health-agent/probers/memory"
-	"github.com/Symantec/health-agent/probers/netif"
-	"github.com/Symantec/health-agent/probers/network"
-	"github.com/Symantec/health-agent/probers/packages"
-	"github.com/Symantec/health-agent/probers/scheduler"
-	"github.com/Symantec/health-agent/probers/storage"
-	"github.com/Symantec/health-agent/probers/systime"
-	"github.com/Symantec/health-agent/probers/virsh"
+	"github.com/Cloud-Foundations/health-agent/lib/proberlist"
+	"github.com/Cloud-Foundations/health-agent/probers/aws"
+	"github.com/Cloud-Foundations/health-agent/probers/dmi"
+	"github.com/Cloud-Foundations/health-agent/probers/filesystems"
+	"github.com/Cloud-Foundations/health-agent/probers/kernel"
+	"github.com/Cloud-Foundations/health-agent/probers/memory"
+	"github.com/Cloud-Foundations/health-agent/probers/netif"
+	"github.com/Cloud-Foundations/health-agent/probers/network"
+	"github.com/Cloud-Foundations/health-agent/probers/packages"
+	"github.com/Cloud-Foundations/health-agent/probers/scheduler"
+	"github.com/Cloud-Foundations/health-agent/probers/storage"
+	"github.com/Cloud-Foundations/health-agent/probers/systime"
+	"github.com/Cloud-Foundations/health-agent/probers/virsh"
 )
 
 func setupProbers() (*proberlist.ProberList, error) {

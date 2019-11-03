@@ -2,11 +2,12 @@ package proberlist
 
 import (
 	"fmt"
-	"github.com/Symantec/health-agent/lib/prober"
 	"io"
 	"net/http"
 	"sort"
 	"strings"
+
+	"github.com/Cloud-Foundations/health-agent/lib/prober"
 )
 
 type dashboardType struct {

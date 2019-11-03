@@ -1,9 +1,10 @@
 package packages
 
 import (
-	libprober "github.com/Symantec/health-agent/lib/prober"
-	"github.com/Symantec/tricorder/go/tricorder"
 	"time"
+
+	libprober "github.com/Cloud-Foundations/health-agent/lib/prober"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder"
 )
 
 type packageEntry struct {

@@ -3,10 +3,11 @@ package filesystems
 import (
 	"bufio"
 	"fmt"
-	"github.com/Symantec/tricorder/go/tricorder/units"
 	"os"
 	"strings"
 	"syscall"
+
+	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
 )
 
 var filename string = "/proc/mounts"

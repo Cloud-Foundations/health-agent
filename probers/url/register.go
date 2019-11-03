@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Symantec/tricorder/go/tricorder"
-	"github.com/Symantec/tricorder/go/tricorder/units"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
 )
 
 func newUrlProber(testname string, urlpath string, urlport uint) *urlconfig {

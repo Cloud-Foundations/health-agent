@@ -1,7 +1,7 @@
 package ldap
 
 import (
-	"github.com/Symantec/tricorder/go/tricorder"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder"
 )
 
 type ldapconfig struct {
