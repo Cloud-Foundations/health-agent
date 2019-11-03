@@ -2,9 +2,10 @@ package filesystems
 
 import (
 	"fmt"
-	"github.com/Cloud-Foundations/Dominator/lib/format"
 	"io"
 	"sort"
+
+	"github.com/Cloud-Foundations/Dominator/lib/format"
 )
 
 type fileSystemsList []*fileSystem

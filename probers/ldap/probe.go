@@ -2,9 +2,10 @@ package ldap
 
 import (
 	"crypto/tls"
-	"gopkg.in/ldap.v2"
 	"net"
 	"time"
+
+	"gopkg.in/ldap.v2"
 )
 
 func (p *ldapconfig) probe() error {

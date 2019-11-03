@@ -2,9 +2,10 @@ package systime
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/Cloud-Foundations/tricorder/go/tricorder"
 	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
-	"os"
 )
 
 var onlineCpuFilename string = "/sys/devices/system/cpu/online"

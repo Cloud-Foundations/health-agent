@@ -2,9 +2,10 @@ package kernel
 
 import (
 	"bufio"
+	"os"
+
 	"github.com/Cloud-Foundations/tricorder/go/tricorder"
 	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
-	"os"
 )
 
 var versionFilename string = "/proc/version"

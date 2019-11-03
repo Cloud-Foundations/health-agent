@@ -1,10 +1,11 @@
 package scheduler
 
 import (
-	libprober "github.com/Cloud-Foundations/health-agent/lib/prober"
-	"github.com/Cloud-Foundations/tricorder/go/tricorder"
 	"io"
 	"time"
+
+	libprober "github.com/Cloud-Foundations/health-agent/lib/prober"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder"
 )
 
 type loadAverage struct {

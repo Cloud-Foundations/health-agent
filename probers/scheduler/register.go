@@ -2,9 +2,10 @@ package scheduler
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/Cloud-Foundations/tricorder/go/tricorder"
 	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
-	"os"
 )
 
 // TODO(rgooch): Figure out how to share with systime package.

@@ -2,8 +2,9 @@ package memory
 
 import (
 	"fmt"
-	"github.com/Cloud-Foundations/Dominator/lib/format"
 	"io"
+
+	"github.com/Cloud-Foundations/Dominator/lib/format"
 )
 
 func (p *prober) writeHtml(writer io.Writer) {

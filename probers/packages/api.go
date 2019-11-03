@@ -1,9 +1,10 @@
 package packages
 
 import (
+	"time"
+
 	libprober "github.com/Cloud-Foundations/health-agent/lib/prober"
 	"github.com/Cloud-Foundations/tricorder/go/tricorder"
-	"time"
 )
 
 type packageEntry struct {

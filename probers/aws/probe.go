@@ -5,12 +5,13 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/Cloud-Foundations/health-agent/lib/proberlist"
-	"github.com/Cloud-Foundations/tricorder/go/tricorder"
-	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/Cloud-Foundations/health-agent/lib/proberlist"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder"
+	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
 )
 
 var versionFilename string = "/proc/version"
