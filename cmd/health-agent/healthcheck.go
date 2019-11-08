@@ -11,6 +11,7 @@ import (
 	"github.com/Cloud-Foundations/Dominator/lib/log"
 	libprober "github.com/Cloud-Foundations/health-agent/lib/prober"
 	"github.com/Cloud-Foundations/health-agent/lib/proberlist"
+	dialprober "github.com/Cloud-Foundations/health-agent/probers/dial"
 	dnsprober "github.com/Cloud-Foundations/health-agent/probers/dns"
 	ldapprober "github.com/Cloud-Foundations/health-agent/probers/ldap"
 	pidprober "github.com/Cloud-Foundations/health-agent/probers/pidfile"
@@ -28,11 +29,13 @@ type testConfig struct {
 }
 
 type testSpecs struct {
+	Address    string `yaml:"address"`
+	Hostname   string `yaml:"hostname"`
+	Network    string `yaml:"network"`
 	Pathname   string
+	SssdConfig string `yaml:"sssd-config"`
 	Urlpath    string `yaml:"url-path"`
 	Urlport    uint   `yaml:"url-port"`
-	Hostname   string `yaml:"hostname"`
-	SssdConfig string `yaml:"sssd-config"`
 }
 
 func setupHealthchecks(configDir string, pl *proberlist.ProberList,
@@ -109,6 +112,8 @@ func setupHealthchecks(configDir string, pl *proberlist.ProberList,
 func makeProber(testname string, c *testConfig,
 	logger log.Logger) proberlist.RegisterProber {
 	switch c.Testtype {
+	case "dial":
+		return dialprober.MakeDialProber(c.Specs.Network, c.Specs.Address)
 	case "dns":
 		hostname := c.Specs.Hostname
 		return dnsprober.New(testname, hostname)
