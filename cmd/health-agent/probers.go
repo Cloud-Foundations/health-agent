@@ -5,6 +5,7 @@ import (
 	"github.com/Cloud-Foundations/health-agent/probers/aws"
 	"github.com/Cloud-Foundations/health-agent/probers/dmi"
 	"github.com/Cloud-Foundations/health-agent/probers/filesystems"
+	"github.com/Cloud-Foundations/health-agent/probers/images"
 	"github.com/Cloud-Foundations/health-agent/probers/kernel"
 	"github.com/Cloud-Foundations/health-agent/probers/memory"
 	"github.com/Cloud-Foundations/health-agent/probers/netif"
@@ -27,6 +28,7 @@ func setupProbers() (*proberlist.ProberList, error) {
 	pl.CreateAndAdd(storage.Register, "/sys/storage", 0)
 	pl.CreateAndAdd(systime.Register, "/sys/systime", 0)
 	pl.CreateAndAdd(kernel.Register, "/sys/kernel", 0)
+	pl.CreateAndAdd(images.Register, "/sys/images", 0)
 	pl.CreateAndAdd(packages.Register, "/sys/packages", 0)
 	pl.Add(virsh.New(), "/sys/hypervisor/virsh", 0)
 	go func() { pl.Add(aws.New(), "/sys/cloud/aws", 0) }()
