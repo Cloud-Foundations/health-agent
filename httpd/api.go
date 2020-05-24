@@ -1,7 +1,9 @@
 package httpd
 
 import (
+	"fmt"
 	"io"
+	"net"
 	"net/http"
 
 	"github.com/Cloud-Foundations/Dominator/lib/html"
@@ -22,13 +24,20 @@ type RequestHtmlWriter interface {
 var htmlWriters []HtmlWriter
 
 func StartServer(portNum uint, logger log.DebugLogger) error {
-	listener, err := reverseconnection.Listen("tcp", portNum, logger)
-	if err != nil {
-		return err
-	}
-	err = listener.RequestConnections(tricorder.CollectorServiceName)
-	if err != nil {
-		return err
+	var listener net.Listener
+	if l, err := reverseconnection.Listen("tcp", portNum, logger); err != nil {
+		logger.Printf("error creating reverse listener, falling back: %s\n",
+			err)
+		address := fmt.Sprintf(":%d", portNum)
+		if listener, err = net.Listen("tcp", address); err != nil {
+			return err
+		}
+	} else {
+		listener = l
+		err = l.RequestConnections(tricorder.CollectorServiceName)
+		if err != nil {
+			return fmt.Errorf("error requesting reverse connections: %s", err)
+		}
 	}
 	html.HandleFunc("/", statusHandler)
 	html.HandleFunc("/favicon.ico", func(http.ResponseWriter, *http.Request) {})
