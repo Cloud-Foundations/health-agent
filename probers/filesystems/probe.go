@@ -27,9 +27,16 @@ func (p *prober) probe() error {
 			return err
 		}
 	}
-	// TODO(rgooch): Clean up unprobed file-systems once tricorder supports
-	//               unregistration.
-	return scanner.Err()
+	if err := scanner.Err(); err != nil {
+		return err
+	}
+	for device, fs := range p.fileSystems {
+		if !fs.probed {
+			delete(p.fileSystems, device)
+			fs.dir.UnregisterDirectory()
+		}
+	}
+	return nil
 }
 
 func (p *prober) processMountLine(line string) error {
@@ -96,9 +103,6 @@ func (p *prober) processMountLine(line string) error {
 			units.None, "true if writable, else read-only"); err != nil {
 			return err
 		}
-	}
-	if fs.probed {
-		return nil
 	}
 	fs.available = statbuf.Bavail * uint64(statbuf.Bsize)
 	fs.free = statbuf.Bfree * uint64(statbuf.Bsize)
