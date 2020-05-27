@@ -25,9 +25,16 @@ func (p *prober) probe() error {
 			return err
 		}
 	}
-	// TODO(rgooch): Clean up unprobed devices once tricorder
-	//               supports unregistration.
-	return scanner.Err()
+	if err := scanner.Err(); err != nil {
+		return err
+	}
+	for name, device := range p.storageDevices {
+		if !device.probed {
+			delete(p.storageDevices, name)
+			device.dir.UnregisterDirectory()
+		}
+	}
+	return nil
 }
 
 func (p *prober) processPartitionLine(line string) error {
