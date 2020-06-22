@@ -28,9 +28,16 @@ func (p *prober) probe() error {
 			return err
 		}
 	}
-	// TODO(rgooch): Clean up unprobed network interfaces once tricorder
-	//               supports unregistration.
-	return scanner.Err()
+	if err := scanner.Err(); err != nil {
+		return err
+	}
+	for name, netIf := range p.netInterfaces {
+		if !netIf.probed {
+			delete(p.netInterfaces, name)
+			netIf.dir.UnregisterDirectory()
+		}
+	}
+	return nil
 }
 
 func (p *prober) processNetdevLine(line string) error {
