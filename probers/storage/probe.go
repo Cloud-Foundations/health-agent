@@ -3,12 +3,18 @@ package storage
 import (
 	"bufio"
 	"fmt"
+	"io/ioutil"
 	"os"
+	"strconv"
+	"strings"
 
 	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
 )
 
-var filename string = "/proc/partitions"
+var (
+	canDiscardFormat string = "/sys/class/block/%s/queue/discard_granularity"
+	filename         string = "/proc/partitions"
+)
 
 func (p *prober) probe() error {
 	for _, device := range p.storageDevices {
@@ -63,8 +69,21 @@ func (p *prober) processPartitionLine(line string) error {
 			units.Byte, "size of storage device"); err != nil {
 			return err
 		}
+		if err := metricsDir.RegisterMetric("can-discard", &device.canDiscard,
+			units.None, "Can discard?"); err != nil {
+			return err
+		}
 	}
 	device.size = size << 10
+	canDiscard := false
+	data, err := ioutil.ReadFile(fmt.Sprintf(canDiscardFormat, name))
+	if err == nil {
+		discardGranularity, err := strconv.Atoi(strings.TrimSpace(string(data)))
+		if discardGranularity > 0 && err == nil {
+			canDiscard = true
+		}
+	}
+	device.canDiscard = canDiscard
 	device.probed = true
 	return nil
 }
