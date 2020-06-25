@@ -3,11 +3,9 @@ package storage
 import (
 	"bufio"
 	"fmt"
-	"io/ioutil"
 	"os"
-	"strconv"
-	"strings"
 
+	"github.com/Cloud-Foundations/health-agent/lib/sysfs"
 	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
 )
 
@@ -76,12 +74,10 @@ func (p *prober) processPartitionLine(line string) error {
 	}
 	device.size = size << 10
 	canDiscard := false
-	data, err := ioutil.ReadFile(fmt.Sprintf(canDiscardFormat, name))
-	if err == nil {
-		discardGranularity, err := strconv.Atoi(strings.TrimSpace(string(data)))
-		if discardGranularity > 0 && err == nil {
-			canDiscard = true
-		}
+	discardGranularity, err := sysfs.ReadUint64(
+		fmt.Sprintf(canDiscardFormat, name))
+	if discardGranularity > 0 && err == nil {
+		canDiscard = true
 	}
 	device.canDiscard = canDiscard
 	device.probed = true
