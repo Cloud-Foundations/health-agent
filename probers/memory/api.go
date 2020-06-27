@@ -8,9 +8,10 @@ import (
 )
 
 type prober struct {
-	available uint64
-	free      uint64
-	total     uint64
+	available     uint64
+	free          uint64
+	haveAvailable bool
+	total         uint64
 }
 
 func Register(dir *tricorder.DirectorySpec) libprober.Prober {
