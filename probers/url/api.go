@@ -36,7 +36,7 @@ func (p *urlconfig) HealthCheck() bool {
 }
 
 func (p *urlconfig) Probe() error {
-	return p.probe()
+	return p.probe(p.useTLS)
 }
 
 func (p *urlconfig) Register(dir *tricorder.DirectorySpec) error {

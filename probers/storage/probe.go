@@ -5,10 +5,14 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/Cloud-Foundations/health-agent/lib/sysfs"
 	"github.com/Cloud-Foundations/tricorder/go/tricorder/units"
 )
 
-var filename string = "/proc/partitions"
+var (
+	canDiscardFormat string = "/sys/class/block/%s/queue/discard_granularity"
+	filename         string = "/proc/partitions"
+)
 
 func (p *prober) probe() error {
 	for _, device := range p.storageDevices {
@@ -25,9 +29,16 @@ func (p *prober) probe() error {
 			return err
 		}
 	}
-	// TODO(rgooch): Clean up unprobed devices once tricorder
-	//               supports unregistration.
-	return scanner.Err()
+	if err := scanner.Err(); err != nil {
+		return err
+	}
+	for name, device := range p.storageDevices {
+		if !device.probed {
+			delete(p.storageDevices, name)
+			device.dir.UnregisterDirectory()
+		}
+	}
+	return nil
 }
 
 func (p *prober) processPartitionLine(line string) error {
@@ -56,8 +67,19 @@ func (p *prober) processPartitionLine(line string) error {
 			units.Byte, "size of storage device"); err != nil {
 			return err
 		}
+		if err := metricsDir.RegisterMetric("can-discard", &device.canDiscard,
+			units.None, "Can discard?"); err != nil {
+			return err
+		}
 	}
 	device.size = size << 10
+	canDiscard := false
+	discardGranularity, err := sysfs.ReadUint64(
+		fmt.Sprintf(canDiscardFormat, name))
+	if discardGranularity > 0 && err == nil {
+		canDiscard = true
+	}
+	device.canDiscard = canDiscard
 	device.probed = true
 	return nil
 }

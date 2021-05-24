@@ -18,8 +18,5 @@ func register(dir *tricorder.DirectorySpec) *prober {
 		}
 	}
 	p.storageDevices = make(map[string]*storageDevice)
-	// TODO(rgooch): Remove this call once tricorder supports dynamic
-	//               registration.
-	p.probe()
 	return p
 }

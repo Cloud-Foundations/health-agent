@@ -10,6 +10,7 @@ func (p *prober) probe() error {
 	} else {
 		p.available = info.Available
 		p.free = info.Free
+		p.haveAvailable = info.HaveAvailable
 		p.total = info.Total
 	}
 	return nil

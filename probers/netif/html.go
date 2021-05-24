@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"io"
 	"sort"
+
+	"github.com/Cloud-Foundations/Dominator/lib/format"
 )
 
 type netInterfacesList []*netInterface
@@ -28,9 +30,11 @@ func (p *prober) writeHtml(writer io.Writer) {
 	fmt.Fprintln(writer, `<table border="1">`)
 	fmt.Fprintln(writer, "  <tr>")
 	fmt.Fprintln(writer, "    <th>Name</th>")
-	fmt.Fprintln(writer, "    <th>Rx</th>")
+	fmt.Fprintln(writer, "    <th>Rx/s</th>")
+	fmt.Fprintln(writer, "    <th>Rx%</th>")
 	fmt.Fprintln(writer, "    <th>Utilisation</th>")
-	fmt.Fprintln(writer, "    <th>Tx</th>")
+	fmt.Fprintln(writer, "    <th>Tx/s</th>")
+	fmt.Fprintln(writer, "    <th>Tx%</th>")
 	fmt.Fprintln(writer, "    <th>Utilisation</th>")
 	fmt.Fprintln(writer, "  </tr>")
 	for _, fs := range netIfList {
@@ -45,8 +49,12 @@ func (netIf *netInterface) writeHtml(writer io.Writer) {
 	txUtilisation := float64(netIf.txDataRate) / float64(netIf.speed)
 	fmt.Fprintln(writer, "  <tr>")
 	fmt.Fprintf(writer, "    <td><center>%s</td>\n", netIf.name)
+	fmt.Fprintf(writer, "    <td><center>%s</td>\n",
+		format.FormatBytes(netIf.rxDataRate))
 	fmt.Fprintf(writer, "    <td><center>%.1f%%</td>\n", rxUtilisation*100)
 	writeHtmlBar(writer, rxUtilisation)
+	fmt.Fprintf(writer, "    <td><center>%s</td>\n",
+		format.FormatBytes(netIf.txDataRate))
 	fmt.Fprintf(writer, "    <td><center>%.1f%%</td>\n", txUtilisation*100)
 	writeHtmlBar(writer, txUtilisation)
 	fmt.Fprintln(writer, "  </tr>")

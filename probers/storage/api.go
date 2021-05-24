@@ -12,9 +12,10 @@ type prober struct {
 }
 
 type storageDevice struct {
-	dir    *tricorder.DirectorySpec
-	size   uint64
-	probed bool
+	canDiscard bool
+	dir        *tricorder.DirectorySpec
+	probed     bool
+	size       uint64
 }
 
 func Register(dir *tricorder.DirectorySpec) libprober.Prober {
