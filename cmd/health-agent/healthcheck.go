@@ -29,13 +29,14 @@ type testConfig struct {
 }
 
 type testSpecs struct {
-	Address    string `yaml:"address"`
-	Hostname   string `yaml:"hostname"`
-	Network    string `yaml:"network"`
-	Pathname   string
-	SssdConfig string `yaml:"sssd-config"`
-	Urlpath    string `yaml:"url-path"`
-	Urlport    uint   `yaml:"url-port"`
+	Address    string   `yaml:"address"`
+	Hostname   string   `yaml:"hostname"`
+	Network    string   `yaml:"network"`
+	Pathname   string   `yaml:"pathname"`
+	Args       []string `yaml:"args"`
+	SssdConfig string   `yaml:"sssd-config"`
+	Urlpath    string   `yaml:"url-path"`
+	Urlport    uint     `yaml:"url-port"`
 }
 
 func setupHealthchecks(configDir string, pl *proberlist.ProberList,
@@ -136,7 +137,7 @@ func makeProber(testname string, c *testConfig,
 		if testprogpath == "" {
 			return nil
 		}
-		return testprogprober.Maketestprogprober(testname, testprogpath)
+		return testprogprober.Maketestprogprober(testname, testprogpath, c.Specs.Args...)
 	case "url":
 		urlpath := c.Specs.Urlpath
 		urlport := c.Specs.Urlport
