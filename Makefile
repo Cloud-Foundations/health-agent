@@ -1,11 +1,10 @@
 all:
-	@cd $(GOPATH)/src; go install github.com/Cloud-Foundations/health-agent/cmd/*
+	CGO_ENABLED=0 go install ./cmd/*
 
 
 TARBALL_TARGET = /tmp/$(LOGNAME)/health-agent.tar.gz
 
-tarball:
-	@cd $(GOPATH)/src; go install github.com/Cloud-Foundations/health-agent/cmd/health-agent
+tarball: all
 	@tar --owner=0 --group=0 -czf $(TARBALL_TARGET) \
 	init.d/health-agent.* \
 	scripts/install.lib \
