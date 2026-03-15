@@ -6,7 +6,8 @@ import (
 
 type testprogconfig struct {
 	testname  string
-	filepath  string
+	command   string
+	args      []string
 	healthy   bool
 	exitCode  int
 	exitError string
@@ -14,10 +15,11 @@ type testprogconfig struct {
 	stderr    string
 }
 
-func Maketestprogprober(testname string, testprogpath string) *testprogconfig {
+func Maketestprogprober(testname string, command string, args ...string) *testprogconfig {
 	p := new(testprogconfig)
 	p.testname = testname
-	p.filepath = testprogpath
+	p.command = command
+	p.args = args
 	return p
 }
 

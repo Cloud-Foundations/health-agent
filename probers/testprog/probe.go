@@ -9,11 +9,14 @@ import (
 )
 
 func (p *testprogconfig) probe() error {
-	if _, err := os.Stat(p.filepath); os.IsNotExist(err) {
-		p.sethealthy(false, err)
-		return err
+	// Check if command exists as file or in PATH
+	if _, err := os.Stat(p.command); os.IsNotExist(err) {
+		if _, err := exec.LookPath(p.command); err != nil {
+			p.sethealthy(false, err)
+			return err
+		}
 	}
-	cmd := exec.Command(p.filepath)
+	cmd := exec.Command(p.command, p.args...)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
 		p.sethealthy(false, err)
