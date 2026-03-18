@@ -3,12 +3,14 @@ package images
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 )
 
 func readFile(filename string, output *string) error {
 	if file, err := os.Open(filename); err != nil {
 		if os.IsNotExist(err) {
+			*output = ""
 			return nil
 		}
 		return err
@@ -16,7 +18,11 @@ func readFile(filename string, output *string) error {
 		defer file.Close()
 		reader := bufio.NewReader(file)
 		var tmp string
-		if nScanned, err := fmt.Fscanf(reader, "%s", &tmp); err != nil {
+		if nScanned, err := fmt.Fscan(reader, &tmp); err != nil {
+			if err == io.EOF {
+				*output = ""
+				return nil
+			}
 			return err
 		} else if nScanned != 1 {
 			return fmt.Errorf("got: %d fields, expected 1", nScanned)
